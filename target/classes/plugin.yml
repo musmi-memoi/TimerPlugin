@@ -1,0 +1,9 @@
+name: Timer
+version: '1.0-SNAPSHOT'
+main: jp.rinad.timer.Timer
+api-version: '1.17'
+
+commands:
+  timer:
+    description: timer
+    usage: /<command>

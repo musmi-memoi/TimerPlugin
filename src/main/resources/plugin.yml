@@ -1,0 +1,9 @@
+name: Timer
+version: '${project.version}'
+main: jp.rinad.timer.Timer
+api-version: '1.17'
+
+commands:
+  timer:
+    description: timer
+    usage: /<command>
