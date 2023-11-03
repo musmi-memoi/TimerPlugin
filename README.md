@@ -11,4 +11,7 @@
 これだけです。  
 ![image](https://github.com/Rin-ad/TimerPlugin/assets/149616792/a1295d93-15ef-4655-b2f6-b7cc8bd98fc5)  
 はい。  
+## 製作者
+Rin-ad
 ## ライセンス
+GPL-3.0 license
