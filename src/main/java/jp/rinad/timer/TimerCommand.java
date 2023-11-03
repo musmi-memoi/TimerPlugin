@@ -12,6 +12,16 @@ public class TimerCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender,Command command,String label,String[] args) {
+        if (args.length == 1 && args[0].equalsIgnoreCase("stop")) {
+            if (plugin.isRunning()) {
+                plugin.stopTimer();
+                sender.sendMessage("タイマーを停止しました");
+            } else {
+                sender.sendMessage("タイマーは実行中ではありません");
+            }
+            return true;
+        }
+
         if (args.length == 2 && args[0].equalsIgnoreCase("set")) {
             try {
                 int seconds = Integer.parseInt(args[1]);

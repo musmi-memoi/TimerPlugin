@@ -11,7 +11,16 @@ import java.awt.*;
 
 public final class Timer extends JavaPlugin {
     private int countdownSeconds = 0;
-    private boolean isRunning = false;
+    public boolean isRunning = false;
+    private BukkitRunnable timerTask;
+
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    public void setRunning(boolean running) {
+        isRunning = running;
+    }
 
     @Override
     public void onEnable() {
@@ -22,7 +31,7 @@ public final class Timer extends JavaPlugin {
     public void startTimer(int seconds) {
         countdownSeconds = seconds;
         isRunning = true;
-        new BukkitRunnable() {
+        timerTask = new BukkitRunnable() {
             @Override
             public void run() {
                 if (countdownSeconds <= 0) {
@@ -54,7 +63,17 @@ public final class Timer extends JavaPlugin {
                     countdownSeconds--;
                 }
             }
-        }.runTaskTimer(this, 0, 20);
+        };
+        timerTask.runTaskTimer(this,0,20);
+    }
+
+    public void stopTimer() {
+        if (isRunning) {
+            isRunning = false;
+            if (timerTask != null) {
+                timerTask.cancel();
+            }
+        }
     }
 
     private String formatTime(int seconds) {
@@ -72,4 +91,5 @@ public final class Timer extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
     }
+
 }
