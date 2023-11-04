@@ -25,12 +25,15 @@ public final class Timer extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        saveDefaultConfig();
         getCommand("timer").setExecutor(new TimerCommand(this));
     }
 
     public void startTimer(int seconds) {
         countdownSeconds = seconds;
         isRunning = true;
+        String defaultSound = "entity.player.levelup";
+        String finish = getConfig().getString("finishsound","defaultSound");
         timerTask = new BukkitRunnable() {
             @Override
             public void run() {
@@ -39,12 +42,12 @@ public final class Timer extends JavaPlugin {
                     cancel();
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         player.sendTitle("終了!!","時間になりました!!",10,70,20);
-                        player.playSound(player.getLocation(), "block.anvil.use",1.0F,1.0F);
+                        player.playSound(player.getLocation(), finish,1.0F,1.0F);
                     }
                 } else if (countdownSeconds <= 5) {
 
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.playSound(player.getLocation(),"entity.experience_orb.pickup",1.0F,1.0F);
+                        player.playSound(player.getLocation(),"ui.button.click",1.0F,1.0F);
                         player.sendTitle(String.valueOf(countdownSeconds),"",10,70,20);
                     }
                 } else if (countdownSeconds <= 10) {
